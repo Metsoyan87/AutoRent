@@ -24,7 +24,9 @@ public class Car {
     private String description;
     private double price;
     private Date carYear;
-    private String mark;
+
+    @Enumerated(value = EnumType.STRING)
+    private Mark mark;
 
     @Enumerated(value = EnumType.STRING)
     private City city;

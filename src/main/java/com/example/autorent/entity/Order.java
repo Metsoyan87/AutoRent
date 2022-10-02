@@ -19,7 +19,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private Date startDate;
     private Date endDate;
     @ManyToOne
