@@ -34,10 +34,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .and()
                 .authorizeRequests()
+                .antMatchers("/car/add").hasAuthority(Role.ADMIN.name())
+                .antMatchers("/admin").hasAuthority(Role.ADMIN.name())
+                .antMatchers("/car/change").hasAuthority(Role.ADMIN.name())
+                .antMatchers("/car/delete").hasAuthority(Role.ADMIN.name())
+                .antMatchers("/users/delete").hasAuthority(Role.ADMIN.name())
                 .antMatchers("/users").hasAuthority(Role.ADMIN.name())
-                .antMatchers("/single").authenticated()
+                .antMatchers("/user").hasAuthority(Role.USER.name())
                 .anyRequest()
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied");
+
+
     }
 
 
@@ -46,6 +55,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailService)
                 .passwordEncoder(passwordEncoder);
     }
-
-
 }
