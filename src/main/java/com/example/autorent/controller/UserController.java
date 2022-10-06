@@ -82,4 +82,17 @@ public class UserController {
         userRepository.deleteById(id);
         return "redirect:/admin";
     }
+    @PostMapping("/user/change")
+    public String changeUser(@RequestParam("username") String username) {
+        Optional<User> userOptional = userRepository.findByEmail(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+                user.setName(username);
+                userRepository.save(user);
+
+        }
+        return "redirect:/admin";
+
+    }
 }

@@ -22,6 +22,7 @@
         <th>Password</th>
         <th>Picture</th>
         <th>Delete</th>
+        <th>Change</th>
     </tr>
 
     <tr th:each="user: ${users}">
@@ -36,6 +37,7 @@
         <td th:text="${user.password}"></td>
         <td><img th:if="${user.picUrl != null}" th:src="@{/users/getImage(fileName=${user.picUrl})}"></td>
         <td><a th:href="@{/users/delete(id=${user.id})}">Delete</a></td>
+        <td><a th:href="@{/user/change(id=${user.id})}">change</a></td>
     </tr>
 </table>
 
