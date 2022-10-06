@@ -90,16 +90,16 @@
                     <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                         <ul class="site-menu main-menu js-clone-nav ml-auto ">
 
-                            <li class="active"><a href="/" class="nav-link">
+                            <li ><a href="/" class="nav-link">
                                 <span th:text="#{menu.home}"></span></a></li>
 
-                            <li class="active"><a href="/cars" class="nav-link">
+                            <li ><a href="/cars" class="nav-link">
                                 <span th:text="#{menu.Cars}"></span></a></li>
-                            <li class="active"><a href="/blog" class="nav-link">
+                            <li ><a href="/blog" class="nav-link">
                                 <span th:text="#{menu.Blog}"></span></a></li>
-                            <li class="active"><a href="/about" class="nav-link">
+                            <li ><a href="/about" class="nav-link">
                                 <span th:text="#{menu.About}"></span></a></li>
-                            <li class="active"><a href="/contact" class="nav-link">
+                            <li><a href="/contact" class="nav-link">
                                 <span th:text="#{menu.Contact}"></span></a></li>
 
                             <li  th:if="${currentUser == null}"><a href="/users/add" class="nav-link" >

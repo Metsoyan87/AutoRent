@@ -2,10 +2,16 @@ package com.example.autorent.controller;
 
 import com.example.autorent.entity.User;
 import com.example.autorent.repository.UserRepository;
+import com.example.autorent.security.CurrentUser;
+import com.example.autorent.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,11 +24,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @Controller
+@RequiredArgsConstructor
+
 public class UserController {
-@Autowired
+
+
+    private final UserService userService;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -36,14 +50,36 @@ public class UserController {
     public String userHome() {
         return "user";
     }
+
     @GetMapping("/users")
-    public String users(ModelMap modelMap){
-        List<User> all = userRepository.findAll();
-        modelMap.addAttribute("users",all);
+    public String users(ModelMap modelMap,
+                        @RequestParam("page") Optional<Integer> page,
+                        @RequestParam("size") Optional<Integer> size,
+                        @AuthenticationPrincipal CurrentUser currentUser) {
+
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Page<User> byUserRole = userService.findTasksByUserRole(currentUser.getUser(),
+                PageRequest.of(currentPage - 1, pageSize));
+
+        modelMap.addAttribute("users", byUserRole);
+        int totalPages = byUserRole.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelMap.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        modelMap.addAttribute("users", userService.findAllUsers());
         return "users";
     }
+
     @GetMapping("/users/add")
-    public String addUserPage(){
+    public String addUserPage() {
         return "addUser";
     }
 
@@ -72,27 +108,29 @@ public class UserController {
 
         return "redirect:/users";
     }
+
     @GetMapping(value = "/users/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImage(@RequestParam("fileName") String fileName) throws IOException {
         InputStream inputStream = new FileInputStream(folderPath + File.separator + fileName);
         return IOUtils.toByteArray(inputStream);
     }
+
     @GetMapping("/users/delete")
     public String delete(@RequestParam("id") int id) {
         userRepository.deleteById(id);
         return "redirect:/admin";
     }
+
     @PostMapping("/user/change")
     public String changeUser(@RequestParam("username") String username) {
         Optional<User> userOptional = userRepository.findByEmail(username);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-                user.setName(username);
-                userRepository.save(user);
+            user.setName(username);
+            userRepository.save(user);
 
         }
         return "redirect:/admin";
-
     }
 }
