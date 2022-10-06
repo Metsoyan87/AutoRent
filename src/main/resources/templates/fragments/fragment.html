@@ -24,6 +24,109 @@
 
 
 <th:block th:fragment="sidebar">
+<th:block th:fragment="menuHeeder">
+
+    <style>
+        .dropbtn {
+            background-color: #007bff;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: black;
+        }
+    </style>
+
+
+    <header class="site-navbar site-navbar-target" role="banner">
+
+        <div class="container">
+            <div class="row align-items-center position-relative">
+
+                <div class="col-3">
+                    <div class="site-logo">
+                        <a href="/"><strong>CarRental</strong></a>
+                    </div>
+                </div>
+
+                <div class="col-9  text-right">
+
+                    <span class="d-inline-block d-lg-none"><a href="#"
+                                                              class=" site-menu-toggle js-menu-toggle py-5 "><span
+                            class="icon-menu h3 text-black"></span></a></span>
+
+                    <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav ml-auto ">
+
+                            <li class="active"><a href="/" class="nav-link">
+                                <span th:text="#{menu.home}"></span></a></li>
+
+                            <li class="active"><a href="/cars" class="nav-link">
+                                <span th:text="#{menu.Cars}"></span></a></li>
+                            <li class="active"><a href="/blog" class="nav-link">
+                                <span th:text="#{menu.Blog}"></span></a></li>
+                            <li class="active"><a href="/about" class="nav-link">
+                                <span th:text="#{menu.About}"></span></a></li>
+                            <li class="active"><a href="/contact" class="nav-link">
+                                <span th:text="#{menu.Contact}"></span></a></li>
+
+                            <li  th:if="${currentUser == null}"><a href="/users/add" class="nav-link" >
+                                <span th:text="#{menu.Registration}"></span></a>
+                            </li>
+
+                            <li th:if="${currentUser == null}"><a href="/loginPage" class="nav-link">
+                                <span th:text="#{menu.Login}"></span></a></li>
+                            <th:block th:if="${currentUser != null}">
+                                <a href="/logout">
+                                    <span th:text="#{menu.Logout}"></span></a>
+                            </th:block>
+
+                            <div class="dropdown">
+                                <button class="dropbtn">Lang</button>
+                                <div class="dropdown-content">
+                                    <a href="?lang=hy">Հայ</a>
+                                    <a href="?lang=en">Usa</a>
+                                    <a href="?lang=ru">Рус</a>
+                                </div>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
 
 </th:block>
 

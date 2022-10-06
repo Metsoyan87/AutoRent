@@ -29,56 +29,8 @@
     </div>
 
 
-    <header class="site-navbar site-navbar-target" role="banner">
+    <th:block th:insert="/fragments/fragment::menuHeeder"></th:block>
 
-        <div class="container">
-            <div class="row align-items-center position-relative">
-
-                <div class="col-3">
-                    <div class="site-logo">
-                        <a href="/"><strong>CarRental</strong></a>
-                    </div>
-                </div>
-
-                <div class="col-9  text-right">
-
-                    <span class="d-inline-block d-lg-none"><a href="#"
-                                                              class=" site-menu-toggle js-menu-toggle py-5 "><span
-                            class="icon-menu h3 text-black"></span></a></span>
-
-                    <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
-                        <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                            <li class="active"><a href="/" class="nav-link">
-                                <span th:text="#{menu.home}"></span></a></li>
-
-                            <li><a href="/cars" class="nav-link">
-                                <span th:text="#{menu.Cars}"></span></a></li>
-                            <li><a href="/blog" class="nav-link">
-                                <span th:text="#{menu.Blog}"></span></a></li>
-                            <li><a href="/about" class="nav-link">
-                                <span th:text="#{menu.About}"></span></a></li>
-                            <li><a href="/contact" class="nav-link">
-                                <span th:text="#{menu.Contact}"></span></a></li>
-
-                            <li th:if="${currentUser == null}"><a href="/users/add" class="nav-link">
-                                <span th:text="#{menu.Registration}"></span></a>
-                            </li>
-
-                            <li th:if="${currentUser == null}"><a href="/loginPage" class="nav-link">
-                                <span th:text="#{menu.Login}"></span></a></li>
-                            <th:block th:if="${currentUser != null}">
-                                <a href="/logout">
-                                    <span th:text="#{menu.Logout}"></span></a>
-                            </th:block>
-                        </ul>
-                    </nav>
-                </div>
-
-
-            </div>
-        </div>
-
-    </header>
 
 
     <div class="hero inner-page" style="background-image: url('images/hero_1_a.jpg');">
