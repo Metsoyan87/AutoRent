@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Cars</title>
+</head>
+<body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Add Cars</div>
+                <div class="card-body">
+
+                    <form class="form-horizontal" method="post" action="/car/add">
+
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Model</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Please input Model" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Description</label>
+                            <div class="cols-sm-10">
+                                <textarea name="" id="" class="form-control" placeholder="Write your description." cols="30" rows="10" style="height: 212px;"></textarea>
+<!--                                <div class="input-group">-->
+<!--                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>-->
+<!--                                    <input type="text" class="form-control" name="description" placeholder="Please input Description" />-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Price</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="name"  placeholder="Please input Price" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">CarYear</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="carYear"  placeholder="Please input CarYear" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Mark</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                  <select name="mark" id="cars">
+                                      <option type="BMW">BMW</option>
+                                      <option type="NISSAN">NISSAN</option>
+                                      <option type="TOYOTA">TOYOTA</option>
+                                  </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">City</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <select name="city" id="city">
+                                        <option type="EREVAN">EREVAN</option>
+                                        <option type="GYUMRI">GYUMRI</option>
+                                        <option type="VANADZOR">VANADZOR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">CategoryType</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <select name="categoryType" id="categoryType">
+                                        <option type="SEDAN">SEDAN</option>
+                                        <option type="COUPE">COUPE</option>
+                                        <option type="SPORT">SPORT</option>
+                                        <option type="HATCHBACK">HATCHBACK</option>
+                                        <option type="MINIVAN">MINIVAN</option>
+                                        <option type="PICKUP">PICKUP</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">StatusType</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <select name="statusType" id="statusType">
+                                        <option type="FREE">FREE</option>
+                                        <option type="BUSY">BUSY</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <button type="button" class="btn btn-primary btn-lg btn-block login-button">Add Car</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
