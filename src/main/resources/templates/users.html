@@ -27,41 +27,9 @@
     </div>
 
 
-
     <header class="site-navbar site-navbar-target" role="banner">
-        <div class="container">
-            <div class="row align-items-center position-relative">
 
-                <div class="col-3">
-                    <div class="site-logo">
-                        <a href="/"><strong>CarRental</strong></a>
-                    </div>
-                </div>
-
-                <div class="col-9  text-right">
-
-                    <span class="d-inline-block d-lg-none"><a href="#" class=" site-menu-toggle js-menu-toggle py-5 "><span class="icon-menu h3 text-black"></span></a></span>
-
-                    <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
-                        <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                            <li><a href="/" class="nav-link">Home</a></li>
-                            <li class="active"><a href="/cars" class="nav-link">Cars</a></li>
-                            <li><a href="/blog" class="nav-link">Blog</a></li>
-                            <li><a href="/about" class="nav-link">About</a></li>
-                            <li><a href="/contact" class="nav-link">Contact</a></li>
-
-                            <li th:if="${currentUser == null}"><a href="/users/add" class="nav-link">Registration</a></li>
-
-
-                            <li th:if="${currentUser == null}"><a href="/login" class="nav-link">Login</a></li>
-                            <th:block th:if="${currentUser != null}">
-                                <a href="/logout">Logout</a>
-                            </th:block>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <th:block th:insert="/fragments/fragment::menuHeeder"></th:block>
     </header>
 
 
@@ -71,20 +39,14 @@
             <div class="row align-items-end ">
                 <div class="col-lg-5">
 
-                    <div class="intro">
-                        <h1><strong>Listings</strong></h1>
-                        <div class="custom-breadcrumbs"><a href="index.html">Home</a> <span class="mx-2">/</span> <strong>Listings</strong></div>
+                    <div class="intro" th:each="user: ${users}">
+                        <h1><strong>Welcome</strong><p th:text="${user.name + ' ' + user.surname}"></p></h1>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
 
     <div class="site-section bg-light">
         <div class="container">
@@ -123,7 +85,8 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
                                 <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                             </div>
                         </div>
@@ -157,7 +120,8 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
                                 <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                             </div>
                         </div>
@@ -192,7 +156,8 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
                                 <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                             </div>
                         </div>
@@ -226,7 +191,8 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
                                 <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                             </div>
                         </div>
@@ -260,7 +226,8 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
                                 <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                             </div>
                         </div>
@@ -295,13 +262,51 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem quibusdam.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
                                 <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                             </div>
                         </div>
-
                     </div>
                 </div>
+
+                <!--My Page-->
+
+                <div>
+                    <table border="1px">
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Card Account Number</th>
+                            <th>Driver License</th>
+                            <th>Role</th>
+                            <th>Password</th>
+                            <th>Picture</th>
+                            <th>Change</th>
+                        </tr>
+
+                        <tr th:each="user: ${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.surname}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.phoneNumber}"></td>
+                            <td th:text="${user.cart}"></td>
+                            <td th:text="${user.driverLicence}"></td>
+                            <td th:text="${user.role}"></td>
+                            <td th:text="${user.password}"></td>
+                            <td><img th:if="${user.picUrl != null}"
+                                     th:src="@{/users/getImage(fileName=${user.picUrl})}"></td>
+                            <td><a th:href="@{/user/change(id=${user.id})}">change</a></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                </div>
+
 
             </div>
             <div class="row">
@@ -319,14 +324,13 @@
     </div>
 
 
-
-
     <div class="site-section bg-primary py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7 mb-4 mb-md-0">
                     <h2 class="mb-0 text-white">What are you waiting for?</h2>
-                    <p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, laboriosam.</p>
+                    <p class="mb-0 opa-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati,
+                        laboriosam.</p>
                 </div>
                 <div class="col-lg-5 text-md-right">
                     <a href="#" class="btn btn-primary btn-white">Rent a car now</a>
@@ -334,6 +338,7 @@
             </div>
         </div>
     </div>
+
 
     <th:block th:insert="/fragments/fragment::footerImport"></th:block>
 

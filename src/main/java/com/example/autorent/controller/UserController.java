@@ -52,31 +52,31 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String users(ModelMap modelMap,
-                        @RequestParam("page") Optional<Integer> page,
+    public String users(@RequestParam("page") Optional<Integer> page,
                         @RequestParam("size") Optional<Integer> size,
+                        ModelMap modelMap,
                         @AuthenticationPrincipal CurrentUser currentUser) {
 
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
 
-        Page<User> byUserRole = userService.findTasksByUserRole(currentUser.getUser(),
+        Page<User> byUserRole = userService.findByUserRole(currentUser.getUser(),
                 PageRequest.of(currentPage - 1, pageSize));
 
         modelMap.addAttribute("users", byUserRole);
-        int totalPages = byUserRole.getTotalPages();
 
+        int totalPages = byUserRole.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                     .boxed()
                     .collect(Collectors.toList());
             modelMap.addAttribute("pageNumbers", pageNumbers);
         }
-
-        modelMap.addAttribute("users", userService.findAllUsers());
         return "users";
     }
+
+
 
     @GetMapping("/users/add")
     public String addUserPage() {
@@ -106,7 +106,7 @@ public class UserController {
 
         userRepository.save(user);
 
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping(value = "/users/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
@@ -117,7 +117,7 @@ public class UserController {
 
     @GetMapping("/users/delete")
     public String delete(@RequestParam("id") int id) {
-        userRepository.deleteById(id);
+        userService.deleteById(id);
         return "redirect:/admin";
     }
 

@@ -1,6 +1,5 @@
 package com.example.autorent.service;
 
-
 import com.example.autorent.entity.User;
 import com.example.autorent.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +24,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     @Value("${AutoRent.image.folder}")
     private String folderPath;
@@ -38,7 +38,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public Page<User> findTasksByUserRole(User user, Pageable pageable) {
+    public Page<User> findByUserRole(User user, Pageable pageable) {
         return userRepository.findUsersById(user.getId(), pageable);
 
     }
@@ -53,6 +53,8 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
+        mailService.sendEmail(user.getEmail(), "Welcome", "Hi"
+                + user.getName() + "\n" + "You have successfully registered");
     }
 
     public byte[] getUserImage(String fileName) throws IOException {
@@ -63,4 +65,5 @@ public class UserService {
     public void deleteById(int id) {
         userRepository.deleteById(id);
     }
+
 }

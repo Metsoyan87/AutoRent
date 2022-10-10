@@ -53,7 +53,7 @@ public class MainController {
             if (user.getRole() == Role.ADMIN) {
                 return "redirect:/admin";
             } else if (user.getRole() == Role.USER) {
-                return "redirect:/user";
+                return "redirect:/users";
             }
         }
         return "redirect:/";
