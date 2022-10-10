@@ -76,8 +76,6 @@ public class UserController {
         return "users";
     }
 
-
-
     @GetMapping("/users/add")
     public String addUserPage() {
         return "addUser";
@@ -121,7 +119,7 @@ public class UserController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/user/change")
+    @PostMapping("/users/change")
     public String changeUser(@RequestParam("username") String username) {
         Optional<User> userOptional = userRepository.findByEmail(username);
         if (userOptional.isPresent()) {
@@ -131,6 +129,6 @@ public class UserController {
             userRepository.save(user);
 
         }
-        return "redirect:/admin";
+        return "redirect:/users";
     }
 }

@@ -65,5 +65,18 @@ public class UserService {
     public void deleteById(int id) {
         userRepository.deleteById(id);
     }
+    public void User(int userId,String name) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent() && userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (user.getName() != user.getName()) {
+                user.setName(name);
+                userRepository.save(user);
+            }
+        } else if (userOptional.isPresent() && userId == 0) {
+            userOptional.get().setName(null);
+            userRepository.save(userOptional.get());
+        }
+    }
 
 }
