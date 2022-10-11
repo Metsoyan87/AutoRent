@@ -127,7 +127,6 @@ public class UserController {
 
             user.setName(username);
             userRepository.save(user);
-
         }
         return "redirect:/users";
     }

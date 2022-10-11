@@ -3,7 +3,10 @@
 /* BASIC */
 
 html {
-    background-color: #007bff;
+    /*background-color: #007bff;*/
+    background-image: url("../images/hero_1_a.jpg");
+    background-size: cover;
+
 }
 
 body {

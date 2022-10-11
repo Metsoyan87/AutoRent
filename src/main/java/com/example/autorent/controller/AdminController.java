@@ -26,14 +26,8 @@ public class AdminController {
     @Autowired
     private UserRepository userRepository;
     private final UserService userService;
-//
-//
-//    @GetMapping("/admin")
-//    public String getUsers(ModelMap modelMap) {
-//        List<User> all = userRepository.findAll();
-//        modelMap.addAttribute("users", all);
-//        return "admin";
-//    }
+
+
 
     @GetMapping("/admin")
     public String users(@RequestParam("page") Optional<Integer> page,
