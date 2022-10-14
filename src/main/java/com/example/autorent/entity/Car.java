@@ -33,4 +33,9 @@ public class Car {
 
     @Enumerated(value = EnumType.STRING)
     private CategoryType categoryType;
+
+    @Enumerated(value = EnumType.STRING)
+    private StatusType statusType;
+
+    private String picUrl;
 }

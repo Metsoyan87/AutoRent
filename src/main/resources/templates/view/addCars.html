@@ -17,7 +17,8 @@
                 <div class="card-header">Add Cars</div>
                 <div class="card-body">
 
-                    <form class="form-horizontal" method="post" action="/car/add">
+                    <form class="form-horizontal" action="/car/add"  method="post" enctype="multipart/form-data"
+                    >
 
                         <div class="form-group">
                             <label for="name" class="cols-sm-2 control-label">Model</label>
@@ -110,8 +111,13 @@
                                 </div>
                             </div>
                         </div>
+                <div>
+                    <input type="file" name="carImage" id ="carImage" accept="image/*" required>
+                    <br th:if="${errorMessageFile != null}" >
+                    <span style="color: red" th:if="${errorMessageFile != null}" th:text="${errorMessageFile}"></span>
+                </div>
                         <div class="form-group ">
-                            <button type="button" class="btn btn-primary btn-lg btn-block login-button">Add Car</button>
+                            <button type="submit"  class="btn btn-primary btn-lg btn-block login-button">Add Car</button>
                         </div>
                     </form>
                 </div>

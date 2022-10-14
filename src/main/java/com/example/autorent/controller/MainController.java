@@ -1,4 +1,4 @@
-package com.example.autorent.controller.view;
+package com.example.autorent.controller;
 
 import com.example.autorent.entity.Role;
 import com.example.autorent.entity.User;
@@ -46,14 +46,14 @@ public class MainController {
     public String accessDenied() {
         return "view/accessDenied";
     }
-    @GetMapping("/loginSuccess")
+    @GetMapping("/view/loginSuccess")
     public String loginSuccess(@AuthenticationPrincipal CurrentUser currentUser) {
         if (currentUser != null) {
             User user = currentUser.getUser();
             if (user.getRole() == Role.ADMIN) {
                 return "redirect:/admin";
             } else if (user.getRole() == Role.USER) {
-                return "redirect:/user";
+                return "redirect:/view/user";
             }
         }
         return "redirect:/";

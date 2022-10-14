@@ -1,4 +1,4 @@
-package com.example.autorent.controller.view;
+package com.example.autorent.controller;
 
 import com.example.autorent.entity.User;
 import com.example.autorent.repository.UserRepository;
