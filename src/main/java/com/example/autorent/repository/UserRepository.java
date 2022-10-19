@@ -14,5 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Page<User> findUsersById(int userId, Pageable pageable);
 
+    Optional<User> findByEmailAndVerifyToken(String email,String token);
 
 }

@@ -15,6 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -36,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/car/change").hasAuthority(Role.ADMIN.name())
                 .antMatchers("/car/delete").hasAuthority(Role.ADMIN.name())
                 .antMatchers("/users/delete").hasAuthority(Role.ADMIN.name())
-                .antMatchers("/users/change").hasAuthority(Role.USER.name())
-                .antMatchers("/users/change").hasAuthority(Role.ADMIN.name())
-                .antMatchers("/users").hasAuthority(Role.USER.name())
+                .antMatchers("/users/edit").authenticated()
+                .antMatchers("/order").hasAuthority(Role.USER.name())
+                .antMatchers("/users").authenticated()
                 .anyRequest()
                 .permitAll()
                 .and()
@@ -46,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailService)

@@ -1,27 +1,21 @@
 package com.example.autorent.controller;
 
+import com.example.autorent.dto.EditUserDto;
 import com.example.autorent.entity.User;
-import com.example.autorent.repository.UserRepository;
 import com.example.autorent.security.CurrentUser;
 import com.example.autorent.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
+import javax.mail.MessagingException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,23 +26,19 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 
 public class UserController {
-
-
     private final UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Value("${AutoRent.image.folder}")
-    private String folderPath;
 
 
     @GetMapping("/user")
     public String userHome() {
         return "user";
+    }
+
+    @GetMapping("/user/verify")
+    public String verifyUser(@RequestParam("email") String email,
+                             @RequestParam("token") String token) throws Exception {
+        userService.verifyUser(email, token);
+        return "redirect:/users";
     }
 
     @GetMapping("/users")
@@ -84,8 +74,8 @@ public class UserController {
     @PostMapping("/users/add")
     public String addUser(@ModelAttribute User user,
                           @RequestParam("userImage") MultipartFile file,
-                          ModelMap modelMap) throws IOException {
-        Optional<User> byEmail = userRepository.findByEmail(user.getEmail());
+                          ModelMap modelMap) throws IOException, MessagingException {
+        Optional<User> byEmail = userService.findByEmail(user.getEmail());
         if (byEmail.isPresent()) {
             modelMap.addAttribute("errorMessageEmail", "Email already in use");
             return "addUser";
@@ -95,39 +85,44 @@ public class UserController {
                 modelMap.addAttribute("errorMessageFile", "Please choose only image");
                 return "addUser";
             }
-            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            File newFile = new File(folderPath + File.separator + fileName);
-            file.transferTo(newFile);
-            user.setPicUrl(fileName);
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        userRepository.save(user);
-
+        userService.saveImageUsers(user, file);
         return "redirect:/";
     }
 
     @GetMapping(value = "/users/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImage(@RequestParam("fileName") String fileName) throws IOException {
-        InputStream inputStream = new FileInputStream(folderPath + File.separator + fileName);
-        return IOUtils.toByteArray(inputStream);
+        return userService.getUserImage(fileName);
     }
 
-    @GetMapping("/users/delete")
-    public String delete(@RequestParam("id") int id) {
+    @GetMapping("/users/delete{id}")
+    public String deleteUser(@PathVariable("id") int id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }
 
-    @PostMapping("/users/change")
-    public String changeUser(@RequestParam("username") String username) {
-        Optional<User> userOptional = userRepository.findByEmail(username);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-
-            user.setName(username);
-            userRepository.save(user);
-        }
-        return "redirect:/users";
+    @GetMapping("/users/edit")
+    public String editUser(@RequestParam("userId") int id, ModelMap modelMap) {
+//        Optional<User> userOptional = userService.findById(id);
+//        if (userOptional.isEmpty()) {
+//            return "redirect:/admin";
+//        }
+        modelMap.addAttribute("userId", id);
+        return "editUsers";
     }
+
+    @PostMapping("/users/edit/{id}")
+    public String editUser(@PathVariable int id,
+                           @ModelAttribute EditUserDto dto,
+                           ModelMap modelMap) {
+        try {
+            userService.editUser(id, dto);
+            return "redirect:/users";
+        } catch (IllegalStateException ex) {
+            modelMap.addAttribute("errorMessage", ex.getMessage());
+            return "users";
+        }
+    }
+
+
 }

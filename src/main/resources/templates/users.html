@@ -300,7 +300,7 @@
                             <td th:text="${user.password}"></td>
                             <td><img th:if="${user.picUrl != null}"
                                      th:src="@{/users/getImage(fileName=${user.picUrl})}"></td>
-                            <td><a th:href="@{/users/change(id=${user.id})}">change</a></td>
+                            <td><a th:href="@{/users/edit(userId=${user.id})}">Edit</a></td>
                         </tr>
                     </table>
                     <br>

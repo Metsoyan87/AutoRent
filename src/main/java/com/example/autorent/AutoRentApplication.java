@@ -43,6 +43,7 @@ public class AutoRentApplication implements CommandLineRunner {
                     .email("admin@mail.com")
                     .phoneNumber("00000000")
                     .cart("00000000")
+                    .isEnable(true)
                     .driverLicence("00000000")
                     .password(passwordEncoder().encode("admin"))
                     .role(Role.ADMIN)

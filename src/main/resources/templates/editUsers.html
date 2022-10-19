@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{'/users/edit/' + ${userId}}" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="surname" placeholder="surname"><br>
+    <input type="email" id="email" name="email" placeholder="email"/><br>
+    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="phoneNumber"/><br>
+    <input type="text" id="cart" name="cart" placeholder="cart"/><br>
+    <input type="text" id="driverLicence" name="driverLicence" placeholder="driverLicence"/><br>
+    <div>
+        <input type="file" name="image" id ="userImage" accept="image/*" >
+    </div>
+
+    <input type="submit" value="Edit User">
+</form>
+</body>
+</html>

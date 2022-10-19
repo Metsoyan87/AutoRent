@@ -3,7 +3,6 @@ package com.example.autorent.controller;
 import com.example.autorent.entity.User;
 import com.example.autorent.repository.UserRepository;
 import com.example.autorent.security.CurrentUser;
-import com.example.autorent.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,9 +24,6 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
-    private final UserService userService;
-
-
 
     @GetMapping("/admin")
     public String users(@RequestParam("page") Optional<Integer> page,

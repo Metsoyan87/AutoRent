@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div method="post">
+    <form method="post" action="/order/add"  enctype="multipart/form-data">
+        <div>
+            <input type="date" id="car_end_date" name="date" placeholder="Enter end date"/>
+        </div>
+
+        <div>
+            <input type="date" id="car_start_date" name="surname" placeholder="Enter start date"/>
+        </div>
+
+
+        <div>
+            <select name="payment_type" id="payment_type">
+                <option value="Online">Online</option>
+                <option value="Ofline">Ofline</option>
+            </select>
+        </div>
+
+
+        <input type="submit" class="fadeIn fourth" value="Register">
+
+    </form>
+
+</div>
+</body>
+</html>

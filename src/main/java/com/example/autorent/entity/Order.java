@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,14 +14,16 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "order")
+@Table(name = "car_orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date startDate;
-    private Date endDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date carStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date carEndDate;
     @ManyToOne
     private Car car;
     @ManyToOne
