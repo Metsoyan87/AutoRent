@@ -32,27 +32,24 @@ public class AutoRentApplication implements CommandLineRunner {
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Override
     public void run(String... args) throws Exception {
+        Optional<User> byEmail = userRepository.findByEmail("admin@mail.com");
 
+        if (byEmail.isEmpty()) {
+            userRepository.save(User.builder()
+                    .name("admin")
+                    .surname("admin")
+                    .email("admin@mail.com")
+                    .phoneNumber("00000000")
+                    .cart("00000000")
+                    .isEnable(true)
+                    .driverLicence("00000000")
+                    .password(passwordEncoder().encode("admin"))
+                    .role(Role.ADMIN)
+                    .build());
+        }
     }
-
-//    @Override
-//    public void run(String... args) throws Exception {
-//        Optional<User> byEmail = userRepository.findByEmail("admin@mail.com");
-//
-//        if (byEmail.isEmpty()) {
-//            userRepository.save(User.builder()
-//                    .name("admin")
-//                    .surname("admin")
-//                    .email("admin@mail.com")
-//                    .phoneNumber("00000000")
-//                    .cart("00000000")
-//                    .isEnable(true)
-//                    .driverLicence("00000000")
-//                    .password(passwordEncoder().encode("admin"))
-//                    .role(Role.ADMIN)
-//                    .build());
-//        }
-//    }
 }
