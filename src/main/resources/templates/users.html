@@ -41,6 +41,7 @@
 
                     <div class="intro" th:each="user: ${users}">
                         <h1><strong>Welcome</strong><p th:text="${user.name + ' ' + user.surname}"></p></h1>
+
                     </div>
 
                 </div>
@@ -271,42 +272,6 @@
                 </div>
 
                 <!--My Page-->
-
-                <div>
-                    <table border="1px">
-                        <tr>
-                            <th>id</th>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Card Account Number</th>
-                            <th>Driver License</th>
-                            <th>Role</th>
-                            <th>Password</th>
-                            <th>Picture</th>
-                            <th>Change</th>
-                        </tr>
-
-                        <tr th:each="user: ${users}">
-                            <td th:text="${user.id}"></td>
-                            <td th:text="${user.name}"></td>
-                            <td th:text="${user.surname}"></td>
-                            <td th:text="${user.email}"></td>
-                            <td th:text="${user.phoneNumber}"></td>
-                            <td th:text="${user.cart}"></td>
-                            <td th:text="${user.driverLicence}"></td>
-                            <td th:text="${user.role}"></td>
-                            <td th:text="${user.password}"></td>
-                            <td><img th:if="${user.picUrl != null}"
-                                     th:src="@{/users/getImage(fileName=${user.picUrl})}"></td>
-                            <td><a th:href="@{/users/edit(userId=${user.id})}">Edit</a></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <br>
-                </div>
-
 
             </div>
             <div class="row">

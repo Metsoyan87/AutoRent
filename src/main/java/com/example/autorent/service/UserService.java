@@ -128,8 +128,6 @@ public class UserService {
     }
 
     private void edit(User user, EditUserDto dto) {
-        String name = dto.getName();
-        String surname = dto.getSurname();
         String email = dto.getEmail();
         String password = dto.getPassword();
         String phoneNumber = dto.getPhoneNumber();
@@ -137,12 +135,7 @@ public class UserService {
         String driverLicence = dto.getDriverLicence();
         MultipartFile image = dto.getImage();
 
-        if (StringUtils.hasText(name)) {
-            user.setName(name);
-        }
-        if (StringUtils.hasText(surname)) {
-            user.setSurname(surname);
-        }
+
         if (StringUtils.hasText(email)) {
             user.setEmail(email);
         }

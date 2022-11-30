@@ -90,7 +90,7 @@
                     <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                         <ul class="site-menu main-menu js-clone-nav ml-auto ">
 
-                            <li ><a href="/" class="nav-link">
+                            <li><a href="/" class="nav-link">
                                 <span th:text="#{menu.home}"></span></a></li>
 
                             <li ><a href="/cars" class="nav-link">
@@ -108,17 +108,28 @@
 
                             <li th:if="${currentUser == null}"><a href="/loginPage" class="nav-link">
                                 <span th:text="#{menu.Login}"></span></a></li>
+
+                            <li th:if="${currentUser != null}"><a href="userpage" class="nav-link">
+                                <span th:text="#{menu.MyPage}"></span></a></li>
+
+<!--                            <th:block th:if="${currentUser != null}">-->
+<!--                                <a href="userpage"></a>-->
+<!--                                <span th:text="#{menu.myPage}"></span></a>-->
+<!--                            </th:block>-->
+
                             <th:block th:if="${currentUser != null}">
                                 <a href="/logout">
                                     <span th:text="#{menu.Logout}"></span></a>
                             </th:block>
 
-                            <div class="dropdown">
+
+
+                            <div class="dropdown" >
                                 <button class="dropbtn">Lang</button>
                                 <div class="dropdown-content">
-                                    <a href="?lang=hy">Հայ</a>
-                                    <a href="?lang=en">Usa</a>
-                                    <a href="?lang=ru">Рус</a>
+                                    <a href="?lang=hy">Հայ</a><br>
+                                    <a href="?lang=en">Usa</a><br>
+                                    <a href="?lang=ru">Рус</a><br>
                                 </div>
                             </div>
                         </ul>

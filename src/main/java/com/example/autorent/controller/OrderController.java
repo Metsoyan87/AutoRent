@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final UserService userService;
-    private final CarService carService;
-    private final OrderService orderService;
+//    private final UserService userService;
+//    private final CarService carService;
+//    private final OrderService orderService;
 
 
     @GetMapping("/order")

@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/myStyle.css">
 </head>
 <body>
 
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+
 <form th:action="@{'/users/edit/' + ${userId}}" method="post" enctype="multipart/form-data">
-    <input type="text" name="name" placeholder="name"><br>
-    <input type="text" name="surname" placeholder="surname"><br>
+
     <input type="email" id="email" name="email" placeholder="email"/><br>
     <input type="text" id="phoneNumber" name="phoneNumber" placeholder="phoneNumber"/><br>
     <input type="text" id="cart" name="cart" placeholder="cart"/><br>
@@ -19,5 +22,7 @@
 
     <input type="submit" value="Edit User">
 </form>
+    </div>
+</div>
 </body>
 </html>

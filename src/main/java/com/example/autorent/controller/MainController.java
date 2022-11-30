@@ -3,21 +3,32 @@ package com.example.autorent.controller;
 import com.example.autorent.entity.Role;
 import com.example.autorent.entity.User;
 import com.example.autorent.security.CurrentUser;
+import com.example.autorent.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
-public class MainController {
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+@Controller
+@RequiredArgsConstructor
+public class MainController {
+    private final UserService userService;
 
     @GetMapping("/")
     public String mainPage(ModelMap modelMap) {
         modelMap.addAttribute("user", "user");
         return "index";
     }
+
     @GetMapping("/about")
     public String aboutPage() {
         return "about";
@@ -42,10 +53,12 @@ public class MainController {
     public String contact() {
         return "contact";
     }
+
     @GetMapping("/accessDenied")
     public String accessDenied() {
         return "accessDenied";
     }
+
     @GetMapping("/loginSuccess")
     public String loginSuccess(@AuthenticationPrincipal CurrentUser currentUser) {
         if (currentUser != null) {
@@ -66,4 +79,30 @@ public class MainController {
         }
         return "loginPage";
     }
+
+    @GetMapping("/userpage")
+    public String userPage(@RequestParam("page") Optional<Integer> page,
+                           @RequestParam("size") Optional<Integer> size,
+                           ModelMap modelMap,
+                           @AuthenticationPrincipal CurrentUser currentUser) {
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Page<User> byUserRole = userService.findByUserRole(currentUser.getUser(),
+                PageRequest.of(currentPage - 1, pageSize));
+
+        modelMap.addAttribute("users", byUserRole);
+
+        int totalPages = byUserRole.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelMap.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        return "userpage";
+    }
+
 }
