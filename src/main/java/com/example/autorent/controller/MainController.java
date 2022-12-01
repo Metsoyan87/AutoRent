@@ -80,29 +80,29 @@ public class MainController {
         return "loginPage";
     }
 
-    @GetMapping("/userpage")
-    public String userPage(@RequestParam("page") Optional<Integer> page,
-                           @RequestParam("size") Optional<Integer> size,
-                           ModelMap modelMap,
-                           @AuthenticationPrincipal CurrentUser currentUser) {
-
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
-
-        Page<User> byUserRole = userService.findByUserRole(currentUser.getUser(),
-                PageRequest.of(currentPage - 1, pageSize));
-
-        modelMap.addAttribute("users", byUserRole);
-
-        int totalPages = byUserRole.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            modelMap.addAttribute("pageNumbers", pageNumbers);
-        }
-
-        return "userpage";
-    }
+//    @GetMapping("/users")
+//    public String userPage(@RequestParam("page") Optional<Integer> page,
+//                           @RequestParam("size") Optional<Integer> size,
+//                           ModelMap modelMap,
+//                           @AuthenticationPrincipal CurrentUser currentUser) {
+//
+//        int currentPage = page.orElse(1);
+//        int pageSize = size.orElse(5);
+//
+//        Page<User> byUserRole = userService.findByUserRole(currentUser.getUser(),
+//                PageRequest.of(currentPage - 1, pageSize));
+//
+//        modelMap.addAttribute("users", byUserRole);
+//
+//        int totalPages = byUserRole.getTotalPages();
+//        if (totalPages > 0) {
+//            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+//                    .boxed()
+//                    .collect(Collectors.toList());
+//            modelMap.addAttribute("pageNumbers", pageNumbers);
+//        }
+//
+//        return "users";
+//    }
 
 }

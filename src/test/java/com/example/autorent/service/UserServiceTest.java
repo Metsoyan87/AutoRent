@@ -28,6 +28,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -75,8 +76,8 @@ class UserServiceTest {
         user.setRole(Role.USER);
         user.setSurname("Doe");
         user.setVerifyToken("ABC123");
-//        assertTrue(userService.findByUserRole(user, null).toList().isEmpty());
-//        assertEquals(2, userService.findAllUsers().size());
+        assertTrue(userService.findByUserRole(user, null).toList().isEmpty());
+        assertEquals(2, userService.findAllUsers().size());
 
 
     }
@@ -321,14 +322,6 @@ class UserServiceTest {
         userService.getUserImage("foo.txt");
     }
 
-    /**
-     * Method under test: {@link UserService#User(int, String)}
-     */
-    @Test
-    void testUser() {
-        userService.User(123, "Name");
-        assertEquals(3, userService.findAllUsers().size());
-    }
 
 
     /**
@@ -397,7 +390,6 @@ class UserServiceTest {
         assertFalse(byId.isPresent());
 
 
-
     }
 
     /**
@@ -416,7 +408,7 @@ class UserServiceTest {
         //       at com.example.autorent.service.UserService.deleteById(UserService.java:118)
         //   See https://diff.blue/R013 to resolve this issue.
 
-        userService.deleteById(123);
+        userRepository.deleteById(1);
     }
 
     /**

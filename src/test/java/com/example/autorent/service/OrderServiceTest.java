@@ -63,6 +63,7 @@ class OrderServiceTest {
         User user = new User();
         user.setCart("Cart");
         user.setDriverLicence("Driver Licence");
+        user.setPhoneNumber("19872656");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);

@@ -1,12 +1,10 @@
 package com.example.autorent.controller;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import com.example.autorent.dto.EditUserDto;
 import com.example.autorent.entity.Role;
 import com.example.autorent.entity.User;

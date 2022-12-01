@@ -5,9 +5,10 @@ import com.example.autorent.entity.Role;
 import com.example.autorent.entity.User;
 import com.example.autorent.exception.DuplicateResourceException;
 import com.example.autorent.repository.UserRepository;
-import liquibase.pro.packaged.A;
+
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -79,19 +80,19 @@ public class UserService {
     }
 
 
-    public void User(int userId, String name) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent() && userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (user.getName() != user.getName()) {
-                user.setName(name);
-                userRepository.save(user);
-            }
-        } else if (userOptional.isPresent() && userId == 0) {
-            userOptional.get().setName(null);
-            userRepository.save(userOptional.get());
-        }
-    }
+//    public void user(int userId, String name) {
+//        Optional<User> userOptional = userRepository.findById(userId);
+//        if (userOptional.isPresent()) {
+//            User user = userOptional.get();
+//            if (user.getName() != user.getName()) {
+//                user.setName(name);
+//                userRepository.save(user);
+//            }
+//        } else if (userOptional.isPresent() && userId == 0) {
+//            userOptional.get().setName(null);
+//            userRepository.save(userOptional.get());
+//        }
+//    }
 
     public void save(User user) throws DuplicateResourceException {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
@@ -127,7 +128,7 @@ public class UserService {
         edit(user, dto);
     }
 
-    private void edit(User user, EditUserDto dto) {
+    private void edit(User user, @NotNull EditUserDto dto) {
         String email = dto.getEmail();
         String password = dto.getPassword();
         String phoneNumber = dto.getPhoneNumber();

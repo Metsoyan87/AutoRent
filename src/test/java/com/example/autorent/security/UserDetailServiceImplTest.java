@@ -75,7 +75,7 @@ class UserDetailServiceImplTest {
         //       at com.example.autorent.security.UserDetailServiceImpl.loadUserByUsername(UserDetailServiceImpl.java:27)
         //   See https://diff.blue/R013 to resolve this issue.
 
-        userDetailServiceImpl.loadUserByUsername("");
+        userDetailServiceImpl.loadUserByUsername("Mnacakan");
     }
 }
 
