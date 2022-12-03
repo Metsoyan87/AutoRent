@@ -8,45 +8,90 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet author="MMetsoyan" id="initdb">
-   <createTable tableName="user">
-       <column name="id" type="BIGINT" autoIncrement="true">
-           <constraints primaryKey="true"/>
-       </column>
-       <column name="name" type="VARCHAR(255)">
-           <constraints nullable="false"/>
-       </column>
-       <column name="surname" type="VARCHAR(255)">
-           <constraints nullable="false"/>
-       </column>
-       <column name="email" type="VARCHAR(255)">
-           <constraints nullable="false"/>
-       </column>
-       <column name="phone_number" type="VARCHAR(255)">
-           <constraints nullable="false"/>
-       </column>
-       <column name="cart" type="VARCHAR(255)">
-           <constraints nullable="false"/>
-       </column>
-       <column name="driver_licence" type="VARCHAR(255)">
-           <constraints nullable="false"/>
-       </column>
-       <column name="role" type="ENUM('USER','ADMIN')" defaultValue="USER">
-           <constraints nullable="false"/>
-       </column>
-       <column name="password" type="VARCHAR(255)">
-           <constraints nullable="false"/>
-       </column>
-       <column name="pic_url" type="VARCHAR(255)">
-       </column>
-       <column name="is_enable" type="INT(1)" defaultValue="0">
-           <constraints nullable="false"/>
-       </column>
-   </createTable>
-    </changeSet>
+        <createTable tableName="user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cart" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="driver_licence" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="ENUM('USER','ADMIN')" defaultValue="USER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pic_url" type="VARCHAR(255)">
+            </column>
+            <column name="is_enable" type="INT(1)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="verify_token" type="VARCHAR(255)">
+            </column>
+        </createTable>
 
-    <changeSet id="addVerifyTokenToUser" author="MMetsoyan">
-        <addColumn tableName="user">
-            <column type="varchar(255)" name="verify_token"/>
-        </addColumn>
+        <createTable tableName="car">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="model" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carYear" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mark" type="ENUM('BMW','NISSAN','TOYOTA','FORD','MERCEDES')" defaultValue="MERCEDES">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="ENUM('EREVAN','GYUMRI','VANADZOR')" defaultValue="GYUMRI">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoryType" type="ENUM('SEDAN','COUPE','SPORT','HATCHBACK','MINIVAN','PICKUP')" defaultValue="SEDAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+
+        <createTable tableName="car_order">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="carStartDate" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carEndDate" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="car_Id" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="user_Id" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="paymentType" type="ENUM('ONLINE','CASH')" defaultValue="CASH">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>

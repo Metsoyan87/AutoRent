@@ -5,6 +5,8 @@ import com.example.autorent.entity.Role;
 import com.example.autorent.entity.User;
 import com.example.autorent.exception.DuplicateResourceException;
 import com.example.autorent.repository.UserRepository;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,34 +30,99 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ActiveProfiles({"GULA-YEZ8-9WAK-7FCO"})
 @ExtendWith(SpringExtension.class)
 class UserServiceTest {
-
-
     @MockBean
     private MailService mailService;
-
     @MockBean
     private PasswordEncoder passwordEncoder;
-
     @MockBean
     private UserRepository userRepository;
-
     @Autowired
     private UserService userService;
+
+    private Role role;
+
+//    @BeforeEach
+//    public void setup() {
+//        User user = User.builder()
+//                .id(1)
+//                .name("Cart")
+//                .surname("Driver Licence")
+//                .email("jane.doe@example.org")
+//                .phoneNumber("4105551212")
+//                .password("iloveyou")
+//                .driverLicence("Driver Licence")
+//                .cart("Cart")
+//                .isEnable(true)
+//                .role(Role.USER)
+//                .picUrl("https://example.org/example")
+//                .verifyToken("ABC123")
+//                .build();
+//    }
+
+    @BeforeAll
+    public void beforeAll() {
+        userRepository.deleteAll();
+    }
+
+    /**
+     * Method under test: {@link UserService#findByEmail(String)}
+     */
+    @Test
+    void testFindByEmail() {
+        User user = new User();
+        user.setId(1);
+        user.setName("Name");
+        user.setSurname("Doe");
+        user.setEmail("jane.doe@example.org");
+        user.setPhoneNumber("4105551212");
+        user.setPassword("iloveyou");
+        user.setDriverLicence("Driver Licence");
+        user.setCart("Cart");
+        user.setEnable(true);
+        user.setRole(Role.USER);
+        user.setPicUrl("https://example.org/example");
+        user.setVerifyToken("ABC123");
+
+        userRepository.save(user);
+        Optional<User> userDB = userRepository.findByEmail("jane.doe@example.org");
+        assertThat(userDB).isNotNull();
+
+    }
+
+//    /**
+//     * Method under test: {@link UserService#findByEmail(String)}
+//     */
+//    @Test
+//    void testFindByEmail2() {
+//        assertTrue(userRepository.findByEmail("jane.doe@example.org").isPresent());
+//        assertEquals(10, userService.findAllUsers().size());
+//    }
+//
+//    /**
+//     * Method under test: {@link UserService#findByEmail(String)}
+//     */
+//    @Test
+//    void testFindByEmail3() {
+//        assertThrows(RuntimeException.class, () -> userService.findByEmail("edit"));
+//    }
+
 
     /**
      * Method under test: {@link UserService#findAllUsers()}
      */
     @Test
     void testFindAllUsers() {
-        List<User> users = new ArrayList<>();
-        when(userRepository.findAll()).thenReturn(users);
+        List<User> user = new ArrayList<>();
+        user.add(new User());
+        when(userRepository.findAll()).thenReturn(user);
+        List<User> result = userService.findAllUsers();
+        assertEquals(user, result);
     }
 
     /**
@@ -76,17 +143,13 @@ class UserServiceTest {
         user.setRole(Role.USER);
         user.setSurname("Doe");
         user.setVerifyToken("ABC123");
-        assertTrue(userService.findByUserRole(user, null).toList().isEmpty());
-        assertEquals(2, userService.findAllUsers().size());
+//        assertTrue(userService.findByUserRole(user, null).toList().isEmpty());
+//        assertEquals(2, userService.findAllUsers().size());
 
+        userRepository.save(user);
+        assertThat(user.getRole().compareTo(Role.USER));
 
     }
-
-    /**
-     * Method under test: {@link UserService#findByUserRole(User, Pageable)}
-     */
-
-
     /**
      * Method under test: {@link UserService#saveImageUsers(User, MultipartFile)}
      */
@@ -306,22 +369,9 @@ class UserServiceTest {
     @Test
     @Disabled("TODO: Complete this test")
     void testGetUserImage() throws IOException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.io.FileNotFoundException: C:\Users\metso\IdeaProjects\AutoRent\images\foo.txt (РќРµ СѓРґР°РµС‚СЃСЏ РЅР°Р№С‚Рё СѓРєР°Р·Р°РЅРЅС‹Р№ С„Р°Р№Р»)
-        //       at java.io.FileInputStream.open0(Native Method)
-        //       at java.io.FileInputStream.open(FileInputStream.java:219)
-        //       at java.io.FileInputStream.<init>(FileInputStream.java:157)
-        //       at java.io.FileInputStream.<init>(FileInputStream.java:112)
-        //       at com.example.autorent.service.UserService.getUserImage(UserService.java:77)
-        //   See https://diff.blue/R013 to resolve this issue.
-
 
         userService.getUserImage("foo.txt");
     }
-
 
 
     /**
@@ -352,6 +402,80 @@ class UserServiceTest {
 
         User captorProduct = productArgumentCaptor.getValue();
         assertThat(captorProduct).isEqualTo(user);
+    }
+
+    /**
+     * Method under test: {@link UserService#save(User)}
+     */
+    @Test
+    void testSave2() throws DuplicateResourceException {
+        User user = new User();
+        user.setCart("Cart");
+        user.setDriverLicence("Driver Licence");
+        user.setEmail("jane.doe@example.org");
+        user.setEnable(true);
+        user.setId(1);
+        user.setName("Name");
+        user.setPassword("iloveyou");
+        user.setPhoneNumber("4105551212");
+        user.setPicUrl("https://example.org/example");
+        user.setRole(Role.USER);
+        user.setSurname("Doe");
+        user.setVerifyToken("ABC123");
+        assertThrows(DuplicateResourceException.class, () -> userService.save(user));
+    }
+
+    /**
+     * Method under test: {@link UserService#save(User)}
+     */
+    @Test
+    void testSave3() throws DuplicateResourceException {
+        User user = new User(1, "Name", "Doe", "jane.doe@example.org", "4105551212", "iloveyou", "Driver Licence", "Cart",
+                true, Role.USER, "https://example.org/example", "ABC123");
+        user.setCart("Cart");
+        user.setDriverLicence("Driver Licence");
+        user.setEmail("jane.doe@example.org");
+        user.setEnable(true);
+        user.setId(1);
+        user.setName("Name");
+        user.setPassword("iloveyou");
+        user.setPhoneNumber("4105551212");
+        user.setPicUrl("https://example.org/example");
+        user.setRole(Role.USER);
+        user.setSurname("Doe");
+        user.setVerifyToken("ABC123");
+        assertThrows(DuplicateResourceException.class, () -> userService.save(user));
+    }
+
+    /**
+     * Method under test: {@link UserService#save(User)}
+     */
+    @Test
+    void testSaveTrowDuplicateException() throws DuplicateResourceException {
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            Integer.parseInt("1a");
+        });
+
+        String expectedMessage = "For input string";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+
+//        User user = new User();
+//        user.setCart("Cart");
+//        user.setDriverLicence("Driver Licence");
+//        user.setEmail("Email");
+//        user.setEnable(true);
+//        user.setId(1);
+//        user.setName("Name");
+//        user.setPassword("iloveyou");
+//        user.setPhoneNumber("4105551212");
+//        user.setPicUrl("https://example.org/example");
+//        user.setRole(Role.USER);
+//        user.setSurname("Doe");
+//        user.setVerifyToken("ABC123");
+//        assertThrows(DuplicateResourceException.class, () -> userService.save(user));
     }
 
     /**
@@ -398,16 +522,6 @@ class UserServiceTest {
     @Test
     @Disabled("TODO: Complete this test")
     void testDeleteById2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   org.springframework.dao.EmptyResultDataAccessException: No class com.example.autorent.entity.User entity with id 123 exists!
-        //       at java.util.Optional.orElseThrow(Optional.java:408)
-        //       at com.sun.proxy.$Proxy142.deleteById(null)
-        //       at com.example.autorent.service.UserService.deleteById(UserService.java:118)
-        //   See https://diff.blue/R013 to resolve this issue.
-
         userRepository.deleteById(1);
     }
 

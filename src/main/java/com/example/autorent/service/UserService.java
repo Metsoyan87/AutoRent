@@ -36,21 +36,33 @@ public class UserService {
     @Value("${AutoRent.image.folder}")
     private String folderPath;
 
-
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
+
+//    public Optional<User> findByEmail(String theEmail) {
+//
+//        Optional<User> result = userRepository.findByEmail(theEmail);
+//        User theUser = null;
+//        if(result.isPresent()) {
+//            theUser = result.get();
+//        }
+//        else {
+//           throw new RuntimeException("Did not find userId: " + theUser);
+//        }
+//        return theUser;
+//    }
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public Page<User> findByUserRole(User user, Pageable pageable) {
+    public Page<User> findByUserRole(@NotNull User user, Pageable pageable) {
         return userRepository.findUsersById(user.getId(), pageable);
 
     }
 
-    public void saveImageUsers(User user, MultipartFile file) throws IOException, MessagingException {
+    public void saveImageUsers(User user, @NotNull MultipartFile file) throws IOException, MessagingException {
 
         if (!file.isEmpty() && file.getSize() > 0) {
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
@@ -78,22 +90,6 @@ public class UserService {
         InputStream inputStream = new FileInputStream(folderPath + File.separator + fileName);
         return IOUtils.toByteArray(inputStream);
     }
-
-
-//    public void user(int userId, String name) {
-//        Optional<User> userOptional = userRepository.findById(userId);
-//        if (userOptional.isPresent()) {
-//            User user = userOptional.get();
-//            if (user.getName() != user.getName()) {
-//                user.setName(name);
-//                userRepository.save(user);
-//            }
-//        } else if (userOptional.isPresent() && userId == 0) {
-//            userOptional.get().setName(null);
-//            userRepository.save(userOptional.get());
-//        }
-//    }
-
     public void save(User user) throws DuplicateResourceException {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new DuplicateResourceException("User already exists");
