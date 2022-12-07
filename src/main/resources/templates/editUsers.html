@@ -9,13 +9,13 @@
 
 <div class="wrapper fadeInDown">
     <div id="formContent">
-
+        <a href="/users">My Page</a>
 <form th:action="@{'/users/edit/' + ${userId}}" method="post" enctype="multipart/form-data">
 
     <input type="email" id="email" name="email" placeholder="email"/><br>
     <input type="text" id="phoneNumber" name="phoneNumber" placeholder="phoneNumber"/><br>
-    <input type="text" id="cart" name="cart" placeholder="cart"/><br>
-    <input type="text" id="driverLicence" name="driverLicence" placeholder="driverLicence"/><br>
+    <input type="text" id="card" name="card" placeholder="card"/><br>
+    <input type="text" id="driverLicense" name="driverLicense" placeholder="driverLicense"/><br>
     <div>
         <input type="file" name="image" id ="userImage" accept="image/*" >
     </div>

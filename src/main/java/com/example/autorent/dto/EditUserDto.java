@@ -15,7 +15,7 @@ public class EditUserDto {
     private String email;
     private String password;
     private String phoneNumber;
-    private String driverLicence;
-    private String cart;
+    private String driverLicense;
+    private String card;
     private MultipartFile image;
 }

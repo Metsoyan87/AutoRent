@@ -54,23 +54,6 @@ class MailServiceTest {
         verify(javaMailSender).send((MimeMessage) any());
     }
 
-    /**
-     * Method under test: {@link MailService#sendHtmlEmail(String, String, String)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testSendHtmlEmail2() throws MessagingException, MailException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "javax.mail.internet.MimeMessage.setRecipient(javax.mail.Message$RecipientType, javax.mail.Address)" because "this.mimeMessage" is null
-        //       at com.example.autorent.service.MailService.sendHtmlEmail(MailService.java:35)
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        doNothing().when(javaMailSender).send((MimeMessage) any());
-        when(javaMailSender.createMimeMessage()).thenReturn(null);
-        mailService.sendHtmlEmail("alice.liddell@example.org", "Hello from the Dreaming Spires", "Text");
-    }
 }
 

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.mail.MessagingException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,26 +41,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
-//    public Optional<User> findByEmail(String theEmail) {
-//
-//        Optional<User> result = userRepository.findByEmail(theEmail);
-//        User theUser = null;
-//        if(result.isPresent()) {
-//            theUser = result.get();
-//        }
-//        else {
-//           throw new RuntimeException("Did not find userId: " + theUser);
-//        }
-//        return theUser;
-//    }
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     public Page<User> findByUserRole(@NotNull User user, Pageable pageable) {
         return userRepository.findUsersById(user.getId(), pageable);
-
     }
 
     public void saveImageUsers(User user, @NotNull MultipartFile file) throws IOException, MessagingException {
@@ -85,26 +72,27 @@ public class UserService {
 
 
     }
-
     public byte[] getUserImage(String fileName) throws IOException {
         InputStream inputStream = new FileInputStream(folderPath + File.separator + fileName);
         return IOUtils.toByteArray(inputStream);
     }
-    public void save(User user) throws DuplicateResourceException {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+
+    public void save(User user) {
+        if (userRepository.existsByEmailIgnoreCase(user.getEmail())) {
             throw new DuplicateResourceException("User already exists");
         }
         userRepository.save(user);
     }
 
-    public void verifyUser(String email, String token) throws Exception {
-        Optional<User> userOptional = userRepository.findByEmailAndVerifyToken(email, token);
+    public void verifyUser(String email, String token) {
+        Optional<User> userOptional = userRepository
+                .findByEmailAndVerifyToken(email, token);
         if (userOptional.isEmpty()) {
-            throw new Exception("user Does not exists with email and token");
+            throw new RuntimeException("user Does not exists with email and token");
         }
         User user = userOptional.get();
         if (user.isEnable()) {
-            throw new Exception("User already enabled");
+            throw new RuntimeException("User already enabled");
         }
         user.setEnable(true);
         user.setVerifyToken(null);
@@ -128,10 +116,9 @@ public class UserService {
         String email = dto.getEmail();
         String password = dto.getPassword();
         String phoneNumber = dto.getPhoneNumber();
-        String cart = dto.getCart();
-        String driverLicence = dto.getDriverLicence();
+        String card = dto.getCard();
+        String driverLicense = dto.getDriverLicense();
         MultipartFile image = dto.getImage();
-
 
         if (StringUtils.hasText(email)) {
             user.setEmail(email);
@@ -142,11 +129,11 @@ public class UserService {
         if (StringUtils.hasText(phoneNumber)) {
             user.setPhoneNumber(phoneNumber);
         }
-        if (StringUtils.hasText(cart)) {
-            user.setCart(cart);
+        if (StringUtils.hasText(card)) {
+            user.setCard(card);
         }
-        if (StringUtils.hasText(driverLicence)) {
-            user.setDriverLicence(driverLicence);
+        if (StringUtils.hasText(driverLicense)) {
+            user.setDriverLicense(driverLicense);
         }
         if (!image.isEmpty() && image.getSize() > 0) {
             if (image.getContentType() != null && !image.getContentType().contains("image")) {
@@ -164,4 +151,5 @@ public class UserService {
         }
         userRepository.save(user);
     }
+
 }

@@ -21,8 +21,8 @@ class CurrentUserTest {
     @Test
     void testConstructor() {
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -42,8 +42,8 @@ class CurrentUserTest {
     @Test
     void testConstructor2() {
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -71,8 +71,8 @@ class CurrentUserTest {
     @Test
     void testConstructor3() {
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(false);
         user.setId(1);

@@ -74,8 +74,8 @@ class UserControllerTest {
         //   See https://diff.blue/R013 to resolve this issue.
 
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -93,8 +93,8 @@ class UserControllerTest {
                 new UserService(userRepository, passwordEncoder, new MailService(new JavaMailSenderImpl())));
 
         User user1 = new User();
-        user1.setCart("Cart");
-        user1.setDriverLicence("Driver Licence");
+        user1.setCard("Cart");
+        user1.setDriverLicense("Driver Licence");
         user1.setEmail("jane.doe@example.org");
         user1.setEnable(true);
         user1.setId(1);
@@ -142,8 +142,8 @@ class UserControllerTest {
                 new UserService(userRepository, passwordEncoder, new MailService(new JavaMailSenderImpl())));
 
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -186,8 +186,8 @@ class UserControllerTest {
         UserController userController = new UserController(null);
 
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -219,8 +219,8 @@ class UserControllerTest {
         //   See https://diff.blue/R013 to resolve this issue.
 
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -237,8 +237,8 @@ class UserControllerTest {
         UserController userController = new UserController(userService);
 
         User user1 = new User();
-        user1.setCart("Cart");
-        user1.setDriverLicence("Driver Licence");
+        user1.setCard("Cart");
+        user1.setDriverLicense("Driver Licence");
         user1.setEmail("jane.doe@example.org");
         user1.setEnable(true);
         user1.setId(1);
@@ -276,8 +276,8 @@ class UserControllerTest {
         UserController userController = new UserController(userService);
 
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -474,8 +474,8 @@ class UserControllerTest {
     @Test
     void testVerifyUser() throws Exception {
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(false);
         user.setId(1);
@@ -489,8 +489,8 @@ class UserControllerTest {
         Optional<User> ofResult = Optional.of(user);
 
         User user1 = new User();
-        user1.setCart("Cart");
-        user1.setDriverLicence("Driver Licence");
+        user1.setCard("Cart");
+        user1.setDriverLicense("Driver Licence");
         user1.setEmail("jane.doe@example.org");
         user1.setEnable(true);
         user1.setId(1);

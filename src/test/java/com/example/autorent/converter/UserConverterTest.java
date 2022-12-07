@@ -51,8 +51,8 @@ class UserConverterTest {
     @Test
     void testConvertEntityToResponseDto() {
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -83,8 +83,8 @@ class UserConverterTest {
     @Test
     void testConvertEntitiesToResponseDtos2() {
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);

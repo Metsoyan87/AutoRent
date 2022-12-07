@@ -145,8 +145,8 @@ class MainControllerTest {
                 new UserService(userRepository, passwordEncoder, new MailService(new JavaMailSenderImpl())));
         User user = mock(User.class);
         when(user.getRole()).thenReturn(Role.ADMIN);
-        doNothing().when(user).setCart((String) any());
-        doNothing().when(user).setDriverLicence((String) any());
+        doNothing().when(user).setCard((String) any());
+        doNothing().when(user).setDriverLicense((String) any());
         doNothing().when(user).setEmail((String) any());
         doNothing().when(user).setEnable(anyBoolean());
         doNothing().when(user).setId(anyInt());
@@ -157,8 +157,8 @@ class MainControllerTest {
         doNothing().when(user).setRole((Role) any());
         doNothing().when(user).setSurname((String) any());
         doNothing().when(user).setVerifyToken((String) any());
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -174,8 +174,8 @@ class MainControllerTest {
         assertEquals("redirect:/admin", mainController.loginSuccess(currentUser));
         verify(currentUser).getUser();
         verify(user).getRole();
-        verify(user).setCart((String) any());
-        verify(user).setDriverLicence((String) any());
+        verify(user).setCard((String) any());
+        verify(user).setDriverLicense((String) any());
         verify(user).setEmail((String) any());
         verify(user).setEnable(anyBoolean());
         verify(user).setId(anyInt());

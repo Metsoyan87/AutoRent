@@ -9,7 +9,7 @@
 
     <changeSet author="MMetsoyan" id="initdb">
         <createTable tableName="user">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(255)">
@@ -24,10 +24,10 @@
             <column name="phone_number" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="cart" type="VARCHAR(255)">
+            <column name="card" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="driver_licence" type="VARCHAR(255)">
+            <column name="driver_license" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="role" type="ENUM('USER','ADMIN')" defaultValue="USER">
@@ -38,7 +38,7 @@
             </column>
             <column name="pic_url" type="VARCHAR(255)">
             </column>
-            <column name="is_enable" type="INT(1)" defaultValue="0">
+            <column name="is_enable" type="INT" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
             <column name="verify_token" type="VARCHAR(255)">
@@ -46,7 +46,7 @@
         </createTable>
 
         <createTable tableName="car">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="model" type="VARCHAR(255)">
@@ -67,14 +67,15 @@
             <column name="city" type="ENUM('EREVAN','GYUMRI','VANADZOR')" defaultValue="GYUMRI">
                 <constraints nullable="false"/>
             </column>
-            <column name="categoryType" type="ENUM('SEDAN','COUPE','SPORT','HATCHBACK','MINIVAN','PICKUP')" defaultValue="SEDAN">
+            <column name="categoryType" type="ENUM('SEDAN','COUPE','SPORT','HATCHBACK','MINIVAN','PICKUP')"
+                    defaultValue="SEDAN">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
 
         <createTable tableName="car_order">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="carStartDate" type="DATETIME">
@@ -84,14 +85,16 @@
                 <constraints nullable="false"/>
             </column>
             <column name="car_Id" type="INT">
-                <constraints nullable="true"/>
+                <constraints nullable="false"/>
+
             </column>
             <column name="user_Id" type="INT">
-                <constraints nullable="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="paymentType" type="ENUM('ONLINE','CASH')" defaultValue="CASH">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
+

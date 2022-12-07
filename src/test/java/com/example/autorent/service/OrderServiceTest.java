@@ -61,8 +61,8 @@ class OrderServiceTest {
         car.setPrice(10.0d);
 
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setPhoneNumber("19872656");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
@@ -98,8 +98,8 @@ class OrderServiceTest {
         car1.setPrice(10.0d);
 
         User user1 = new User();
-        user1.setCart("Cart");
-        user1.setDriverLicence("Driver Licence");
+        user1.setCard("Cart");
+        user1.setDriverLicense("Driver Licence");
         user1.setEmail("jane.doe@example.org");
         user1.setEnable(true);
         user1.setId(1);
@@ -146,8 +146,8 @@ class OrderServiceTest {
     @Test
     void testFindAllByUser() {
         User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -170,8 +170,8 @@ class OrderServiceTest {
     void testFindAllByUser2() {
         User user = new User(1, "l.UlUlUlUlUl.U", "Doe", "jane.doe@example.org", "4105551212", "iloveyou",
                 "l.UlUlUlUlUl.U", "l.UlUlUlUlUl.U", true, Role.USER, "https://example.org/example", "ABC123");
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
+        user.setCard("Cart");
+        user.setDriverLicense("Driver Licence");
         user.setEmail("jane.doe@example.org");
         user.setEnable(true);
         user.setId(1);
@@ -187,70 +187,5 @@ class OrderServiceTest {
         assertEquals(actualFindAllByUserResult, orderService.findAll());
     }
 
-    /**
-     * Method under test: {@link OrderService#findAllByUser(User)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testFindAllByUser3() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.example.autorent.entity.User; nested exception is java.lang.IllegalStateException: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.example.autorent.entity.User
-        //       at jdk.proxy4.$Proxy151.findAllByUser(null)
-        //       at com.example.autorent.service.OrderService.findAllByUser(OrderService.java:26)
-        //   java.lang.IllegalStateException: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.example.autorent.entity.User
-        //       at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:151)
-        //       at org.hibernate.query.internal.AbstractProducedQuery.list(AbstractProducedQuery.java:1626)
-        //       at org.hibernate.query.Query.getResultList(Query.java:165)
-        //       at org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter.getResultList(CriteriaQueryTypeQueryAdapter.java:76)
-        //       at jdk.proxy4.$Proxy160.getResultList(null)
-        //       at jdk.proxy4.$Proxy151.findAllByUser(null)
-        //       at com.example.autorent.service.OrderService.findAllByUser(OrderService.java:26)
-        //   org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.example.autorent.entity.User
-        //       at org.hibernate.engine.internal.ForeignKeys.getEntityIdentifierIfNotUnsaved(ForeignKeys.java:347)
-        //       at org.hibernate.type.EntityType.getIdentifier(EntityType.java:508)
-        //       at org.hibernate.type.EntityType.nullSafeSet(EntityType.java:289)
-        //       at org.hibernate.param.NamedParameterSpecification.bind(NamedParameterSpecification.java:53)
-        //       at org.hibernate.loader.hql.QueryLoader.bindParameterValues(QueryLoader.java:682)
-        //       at org.hibernate.loader.Loader.bindPreparedStatement(Loader.java:2150)
-        //       at org.hibernate.loader.Loader.prepareQueryStatement(Loader.java:2127)
-        //       at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2059)
-        //       at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2037)
-        //       at org.hibernate.loader.Loader.doQuery(Loader.java:956)
-        //       at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:357)
-        //       at org.hibernate.loader.Loader.doList(Loader.java:2868)
-        //       at org.hibernate.loader.Loader.doList(Loader.java:2850)
-        //       at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2682)
-        //       at org.hibernate.loader.Loader.list(Loader.java:2677)
-        //       at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:540)
-        //       at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:400)
-        //       at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:219)
-        //       at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1459)
-        //       at org.hibernate.query.internal.AbstractProducedQuery.doList(AbstractProducedQuery.java:1649)
-        //       at org.hibernate.query.internal.AbstractProducedQuery.list(AbstractProducedQuery.java:1617)
-        //       at org.hibernate.query.Query.getResultList(Query.java:165)
-        //       at org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter.getResultList(CriteriaQueryTypeQueryAdapter.java:76)
-        //       at jdk.proxy4.$Proxy160.getResultList(null)
-        //       at jdk.proxy4.$Proxy151.findAllByUser(null)
-        //       at com.example.autorent.service.OrderService.findAllByUser(OrderService.java:26)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        User user = new User();
-        user.setCart("Cart");
-        user.setDriverLicence("Driver Licence");
-        user.setEmail("jane.doe@example.org");
-        user.setEnable(true);
-        user.setId(0);
-        user.setName("Name");
-        user.setPassword("iloveyou");
-        user.setPhoneNumber("4105551212");
-        user.setPicUrl("https://example.org/example");
-        user.setRole(Role.USER);
-        user.setSurname("Doe");
-        user.setVerifyToken("ABC123");
-        orderService.findAllByUser(user);
-    }
 }
 

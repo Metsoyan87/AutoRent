@@ -9,7 +9,8 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <!-- Tabs Titles -->
-        <h2 class="active"> Registration    Or <a href="/loginPage"> Login </a></h2>
+        <a href="/">Home</a>
+        <h2 class="active"> Registration    Or <a href="/loginPage"> Login </a> </h2>
         <!-- Icon -->
         <div class="fadeIn first">
             <img src="/images/1.png" id="icon" alt="User Icon" />
@@ -38,23 +39,16 @@
             </div>
 
             <div>
-                <input type="text" id="cart" name="cart" placeholder="Enter your cart number"/>
+                <input type="text" id="card" name="card" placeholder="Enter your cart number"/>
             </div>
 
             <div>
-                <input type="text" id="driverLicence" name="driverLicence" placeholder="Driver Licence"/>
+                <input type="text" id="driverLicense" name="driverLicense" placeholder="Driver License"/>
             </div>
 
             <div>
                 <input type="password" id="password" name="password" placeholder="Password" minlength="4" required/>
             </div>
-
-            <div>
-                <select name="role" id="role">
-                    <option value="USER">USER</option>
-                </select>
-            </div>
-
             <div>
                 <input type="file" name="userImage" id ="userImage" accept="image/*" required>
                 <br th:if="${errorMessageFile != null}" >

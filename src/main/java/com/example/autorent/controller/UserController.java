@@ -103,10 +103,6 @@ public class UserController {
 
     @GetMapping("/users/edit")
     public String editUser(@RequestParam("userId") int id, ModelMap modelMap) {
-//        Optional<User> userOptional = userService.findById(id);
-//        if (userOptional.isEmpty()) {
-//            return "redirect:/admin";
-//        }
         modelMap.addAttribute("userId", id);
         return "editUsers";
     }

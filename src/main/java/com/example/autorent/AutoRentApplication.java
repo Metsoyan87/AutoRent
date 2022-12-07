@@ -8,7 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,9 +43,9 @@ public class AutoRentApplication implements CommandLineRunner {
                     .surname("admin")
                     .email("admin@mail.com")
                     .phoneNumber("00000000")
-                    .cart("00000000")
+                    .card("00000000")
                     .isEnable(true)
-                    .driverLicence("00000000")
+                    .driverLicense("00000000")
                     .password(passwordEncoder().encode("admin"))
                     .role(Role.ADMIN)
                     .build());
