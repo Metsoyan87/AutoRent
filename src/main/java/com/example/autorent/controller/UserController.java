@@ -86,7 +86,7 @@ public class UserController {
                 return "addUser";
             }
         }
-        userService.saveImageUsers(user, file);
+        userService.uploadImageUsers(user, file);
         return "redirect:/";
     }
 

@@ -63,15 +63,7 @@ class UserControllerTest {
      */
     @Test
     void testAddUser() throws IOException, MessagingException {
-        //   Diffblue Cover was unable to write a Spring test,
-        //   so wrote a non-Spring test instead.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   org.springframework.web.multipart.MultipartException: Current request is not a multipart request
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
-        //   See https://diff.blue/R013 to resolve this issue.
+
 
         User user = new User();
         user.setCard("Cart");
@@ -117,23 +109,7 @@ class UserControllerTest {
     @Test
     @Disabled("TODO: Complete this test")
     void testAddUser2() throws IOException, MessagingException {
-        //   Diffblue Cover was unable to write a Spring test,
-        //   so wrote a non-Spring test instead.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   org.springframework.web.multipart.MultipartException: Current request is not a multipart request
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        // TODO: Complete this test.
-        //   Reason: R011 Sandboxing policy violation.
-        //   Diffblue Cover ran code in your project that tried
-        //     to access files outside the temporary directory (file 'null\1669798379067_', permission 'write').
-        //   Diffblue Cover's default sandboxing policy disallows this in order to prevent
-        //   your code from damaging your system environment.
-        //   See https://diff.blue/R011 to resolve this issue.
 
         UserRepository userRepository = mock(UserRepository.class);
         when(userRepository.findByEmail((String) any())).thenReturn(Optional.empty());
@@ -165,23 +141,7 @@ class UserControllerTest {
     @Test
     @Disabled("TODO: Complete this test")
     void testAddUser3() throws IOException, MessagingException {
-        //   Diffblue Cover was unable to write a Spring test,
-        //   so wrote a non-Spring test instead.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   org.springframework.web.multipart.MultipartException: Current request is not a multipart request
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at com.example.autorent.controller.UserController.addUser(UserController.java:78)
-        //   See https://diff.blue/R013 to resolve this issue.
 
         UserController userController = new UserController(null);
 
@@ -208,15 +168,7 @@ class UserControllerTest {
      */
     @Test
     void testAddUser4() throws IOException, MessagingException {
-        //   Diffblue Cover was unable to write a Spring test,
-        //   so wrote a non-Spring test instead.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   org.springframework.web.multipart.MultipartException: Current request is not a multipart request
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
-        //       at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
-        //   See https://diff.blue/R013 to resolve this issue.
+
 
         User user = new User();
         user.setCard("Cart");
@@ -233,7 +185,7 @@ class UserControllerTest {
         user.setVerifyToken("ABC123");
         UserService userService = mock(UserService.class);
         when(userService.findByEmail((String) any())).thenReturn(Optional.of(user));
-        doNothing().when(userService).saveImageUsers((User) any(), (MultipartFile) any());
+        doNothing().when(userService).uploadImageUsers((User) any(), (MultipartFile) any());
         UserController userController = new UserController(userService);
 
         User user1 = new User();
@@ -272,7 +224,7 @@ class UserControllerTest {
 
         UserService userService = mock(UserService.class);
         when(userService.findByEmail((String) any())).thenReturn(Optional.empty());
-        doNothing().when(userService).saveImageUsers((User) any(), (MultipartFile) any());
+        doNothing().when(userService).uploadImageUsers((User) any(), (MultipartFile) any());
         UserController userController = new UserController(userService);
 
         User user = new User();
@@ -292,7 +244,7 @@ class UserControllerTest {
 
         assertEquals("redirect:/", userController.addUser(user, file, new ModelMap()));
         verify(userService).findByEmail((String) any());
-        verify(userService).saveImageUsers((User) any(), (MultipartFile) any());
+        verify(userService).uploadImageUsers((User) any(), (MultipartFile) any());
     }
 
     /**

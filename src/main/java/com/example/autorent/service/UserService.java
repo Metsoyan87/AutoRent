@@ -4,8 +4,8 @@ import com.example.autorent.dto.EditUserDto;
 import com.example.autorent.entity.Role;
 import com.example.autorent.entity.User;
 import com.example.autorent.exception.DuplicateResourceException;
+import com.example.autorent.exception.EntityNotFoundException;
 import com.example.autorent.repository.UserRepository;
-
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,11 @@ public class UserService {
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
-
+    public User findUserById(int Id) {
+        return userRepository
+                .findById(Id)
+                .orElseThrow(() -> new EntityNotFoundException(new Error( "dos not exist")));
+    }
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -49,7 +53,7 @@ public class UserService {
         return userRepository.findUsersById(user.getId(), pageable);
     }
 
-    public void saveImageUsers(User user, @NotNull MultipartFile file) throws IOException, MessagingException {
+    public void uploadImageUsers(User user, @NotNull MultipartFile file) throws IOException, MessagingException {
 
         if (!file.isEmpty() && file.getSize() > 0) {
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
@@ -72,6 +76,7 @@ public class UserService {
 
 
     }
+
     public byte[] getUserImage(String fileName) throws IOException {
         InputStream inputStream = new FileInputStream(folderPath + File.separator + fileName);
         return IOUtils.toByteArray(inputStream);
@@ -152,4 +157,6 @@ public class UserService {
         userRepository.save(user);
     }
 
+
 }
+

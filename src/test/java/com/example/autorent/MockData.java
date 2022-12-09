@@ -20,7 +20,22 @@ public class MockData {
                 .verifyToken("ABC123")
                 .build();
     }
-
+    public static User getSavedUser(){
+        return User.builder()
+                .id(1)
+                .name("Name")
+                .surname("Doe")
+                .email("jane.doe@example.org")
+                .phoneNumber("4105551212")
+                .password("iloveyou")
+                .driverLicense("Driver Licence")
+                .card("Cart")
+                .isEnable(true)
+                .role(Role.USER)
+                .picUrl("https://example.org/example")
+                .verifyToken("ABC123")
+                .build();
+    }
     public static User getDisabledUser(){
         return User.builder()
                 .id(1)

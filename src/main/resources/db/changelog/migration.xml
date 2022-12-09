@@ -96,5 +96,21 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="initdb1" author="MMetsoyan">
+        <addForeignKeyConstraint baseTableName="car_order"
+                                 baseColumnNames="user_id"
+                                 constraintName="car_order_ibfk_1"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="initdb2" author="MMetsoyan">
+        <addForeignKeyConstraint baseTableName="car_order"
+                                 baseColumnNames="car_id"
+                                 constraintName="car_order_ibfk_2"
+                                 referencedTableName="car"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
 
