@@ -14,8 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
@@ -28,7 +26,6 @@ import java.util.Optional;
 import static com.example.autorent.MockData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -149,25 +146,6 @@ class UserServiceTest {
         assertEquals("secret", user1.getPassword());
     }
 
-    @Test
-    void uploadImageUsers() throws Exception {
-        String fileName = "sampleFile.jpg";
-        MockMultipartFile sampleFile = new MockMultipartFile(
-                "uploaded-file",
-                fileName,
-                "text/plain",
-                "This is the file content".getBytes()
-        );
-        MockMultipartHttpServletRequestBuilder multipartRequest =
-                MockMvcRequestBuilders.multipart("/api/files/upload");
-        User user = getSavedUser();
-        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        userService.uploadImageUsers(user, sampleFile);
-
-        user.setPicUrl(user.getPicUrl() + 1);
-        verify(userRepository).saveAndFlush(user);
-
-    }
 
     @Test
     void shouldReturnByUserRole() {
@@ -179,7 +157,6 @@ class UserServiceTest {
         verify(userRepository, times(1)).findUsersById(getSavedUser().getId(), page.getPageable());
 
     }
-
 
     @Test
     void deleteById() {

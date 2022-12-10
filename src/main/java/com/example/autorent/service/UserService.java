@@ -7,6 +7,7 @@ import com.example.autorent.exception.DuplicateResourceException;
 import com.example.autorent.exception.EntityNotFoundException;
 import com.example.autorent.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
