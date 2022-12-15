@@ -1,0 +1,117 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="roman" id="initdb">
+            <createTable tableName="user">
+                <column name="id" type="INT" autoIncrement="true">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="name" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="surname" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="email" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="phone_number" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="card" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="driver_license" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="role" type="ENUM('USER','ADMIN')" defaultValue="USER">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="password" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="pic_url" type="VARCHAR(255)">
+                </column>
+            </createTable>
+
+            <createTable tableName="car">
+                <column name="id" type="INT" autoIncrement="true">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="model" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="description" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="price" type="DOUBLE">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="car_year" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="mark" type="ENUM('BMW','NISSAN','TOYOTA','FORD','MERCEDES')" defaultValue="MERCEDES">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="city" type="ENUM('EREVAN','GYUMRI','VANADZOR')" defaultValue="GYUMRI">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="category_type" type="ENUM('SEDAN','COUPE','SPORT','HATCHBACK','MINIVAN','PICKUP')"
+                        defaultValue="SEDAN">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="status_type" type="ENUM('FREE','BUSY')"
+                        defaultValue="FREE">
+
+                </column>
+                <column name="pic_url" type="VARCHAR(255)">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+
+
+            <createTable tableName="car_order">
+                <column name="id" type="INT" autoIncrement="true">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="start_date" type="DATETIME">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="end_date" type="DATETIME">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="carId" type="INT">
+                    <constraints nullable="false"/>
+
+                </column>
+                <column name="userId" type="INT">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="payment_type" type="ENUM('ONLINE','CASH')" defaultValue="CASH">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+        </changeSet>
+
+        <changeSet id="addconstraints" author="roman">
+            <addForeignKeyConstraint baseTableName="car_order"
+                                     baseColumnNames="userId"
+                                     constraintName="fk_car_order_user"
+                                     referencedTableName="user"
+                                     referencedColumnNames="id"/>
+
+            <addForeignKeyConstraint baseTableName="car_order"
+                                     baseColumnNames="carId"
+                                     constraintName="fk_car_order_car"
+                                     referencedTableName="car"
+                                     referencedColumnNames="id"/>
+
+    </changeSet>
+
+</databaseChangeLog>

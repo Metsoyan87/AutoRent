@@ -19,6 +19,12 @@ public class MyControllerAdvice {
         }
         return null;
     }
+
+    @ModelAttribute(name = "isAdmin")
+    public boolean isAdmin(@AuthenticationPrincipal CurrentUser currentUser) {
+        return currentUser == null ? false : currentUser.getUser().getRole().name().equals("ADMIN");
+    }
+
     @ModelAttribute(name = "currentUrl")
     public String currentUrl(HttpServletRequest request) {
         return request.getRequestURI();
