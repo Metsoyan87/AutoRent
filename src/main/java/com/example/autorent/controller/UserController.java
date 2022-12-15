@@ -113,8 +113,8 @@ public class UserController {
         return IOUtils.toByteArray(inputStream);
     }
 
-    @GetMapping("/users/delete")
-    public String delete(@RequestParam("id") int id) {
+    @GetMapping("/users/delete/{id}")
+    public String delete(@PathVariable("id") int id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }

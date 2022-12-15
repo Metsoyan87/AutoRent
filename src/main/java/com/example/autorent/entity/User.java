@@ -24,8 +24,8 @@ public class User {
     private String email;
     private String phoneNumber;
     private String password;
-    private String driverLicence;
-    private String cart;
+    private String driverLicense;
+    private String card;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
