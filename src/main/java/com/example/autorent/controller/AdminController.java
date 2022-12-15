@@ -50,6 +50,7 @@ public class AdminController {
                     .collect(Collectors.toList());
             modelMap.addAttribute("pageNumbers", pageNumbers);
         }
-        return "admin";
+        return "/admin";
     }
+
 }

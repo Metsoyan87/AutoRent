@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pick Admin</title>
+    <link rel="shortcut icon" href="admin/images/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- START: Template CSS-->
+    <link rel="stylesheet" href="admin/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="admin/vendors/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="admin/vendors/jquery-ui/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="admin/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="admin/vendors/flags-icon/css/flag-icon.min.css">
+    <!-- END Template CSS-->
+
+    <!-- START: Custom CSS-->
+    <link rel="stylesheet" href="admin/css/main.css">
+    <!-- END: Custom CSS-->
+</head>
+<!-- END Head-->
+
+<!-- START: Body-->
+<body id="main-container" class="default">
+<!-- START: Pre Loader-->
+<div class="se-pre-con">
+    <div class="loader"></div>
+</div>
+<!-- END: Pre Loader-->
+
+
+
+
+<!-- START: Main Content-->
+<main>
+    <div class="container-fluid site-width">
+        <!-- START: Breadcrumbs-->
+        <div class="row ">
+            <div class="col-12  align-self-center">
+                <div class="sub-header mt-3 py-3 align-self-center d-sm-flex w-100 rounded">
+                    <div class="w-sm-100 mr-auto"><h4 class="mb-0">All Users</h4></div>
+
+                    <ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
+                        <li class="breadcrumb-item active"><a href="/admin">Home</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- END: Breadcrumbs-->
+
+        <!-- START: Card Data-->
+        <div class="row row-eq-height">
+            <div class="col-12 col-lg-10 mt-3 pl-lg-0">
+                <div class="card border h-100 contact-list-section">
+                    <div class="card-header border-bottom p-1 d-flex">
+                        <a href="#" class="d-inline-block d-lg-none flip-menu-toggle"><i class="icon-menu"></i></a>
+                        <input type="text" class="form-control border-0 p-2 w-100 h-100 contact-search" placeholder="Search ...">
+                        <a href="#" class="list-style search-bar-menu border-0 active"><i class="icon-list"></i></a>
+                        <a href="#" class="grid-style search-bar-menu"><i class="icon-grid"></i></a>
+                    </div>
+                    <div class="card-body p-0">
+
+                        <div class="contacts list">
+                            <div th:each="user:${users}" class="contact family-contact">
+                                <input type="hidden" name="id" th:value="${user.id}">
+                                <div class="contact-content">
+                                    <div class="contact-profile">
+
+                                        <img th:if="${user.picUrl != null}" th:src="@{/users/getImage(fileName=${user.picUrl})}"  class="user-image img-fluid">
+                                        <img th:if="${user.picUrl == null}" src="/images/1.png" alt="avatar" class="user-image img-fluid">
+                                        <div class="contact-info">
+                                            <p class="contact-name mb-0" th:text="${user.name + ' ' + user.surname}">Kayla Fail</p>
+                                            <p class="contact-position mb-0 small font-weight-bold text-muted" th:text="${user.getRole().name()}">Chief Executive Officer</p>
+                                        </div>
+                                    </div>
+                                    <div class="contact-email">
+                                        <p class="mb-0 small">Email: </p>
+                                        <p th:text="${user.email}" class="user-email"></p>
+                                    </div>
+                                    <div class="contact-location">
+                                        <p class="mb-0 small">Phone </p>
+                                        <p th:text="${user.phoneNumber}" class="user-location"></p>
+                                    </div>
+                                    <div class="contact-phone">
+                                        <p class="mb-0 small">Cart </p>
+                                        <p th:text="${user.card}" class="user-phone"></p>
+                                    </div>
+                                    <div class="contact-phone">
+                                        <p class="mb-0 small">Driver-Licence </p>
+                                        <p th:text="${user.driverLicense}" class="user-phone"></p>
+                                    </div>
+                                    <div class="line-h-1 h5">
+                                        <a class="text-success edit-contact" th:href="@{'/users/change/' + ${user.id}}" data-toggle="modal" data-target="#edittask"><i class="icon-pencil"></i></a>
+                                        <a  th:href="@{'/users/delete/' + ${user.id}}" class="text-danger delete-contact"><i class="icon-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Card DATA-->
+    </div>
+</main>
+<!-- END: Content-->
+
+
+
+<!-- START: Footer-->
+<footer class="site-footer">
+    2020 © PICK
+</footer>
+<!-- END: Footer-->
+
+
+<!-- START: Back to top-->
+<a href="#" class="scrollup text-center">
+    <i class="icon-arrow-up"></i>
+</a>
+<!-- END: Back to top-->
+
+<!-- START: Template JS-->
+<script src="admin/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script src="admin/vendors/jquery-ui/jquery-ui.min.js"></script>
+<script src="admin/vendors/moment/moment.js"></script>
+<script src="admin/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="admin/vendors/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- END: Template JS-->
+
+<!-- START: APP JS-->
+<script src="admin/js/app.js"></script>
+<!-- END: APP JS-->
+
+<!-- START: Page JS-->
+<script src="admin/js/app.contactlist.js"></script>
+<!-- END: Page JS-->
+</body>
+<!-- END: Body-->
+</html>

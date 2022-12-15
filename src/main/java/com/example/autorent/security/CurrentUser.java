@@ -1,5 +1,6 @@
 package com.example.autorent.security;
 
+import com.example.autorent.entity.Car;
 import com.example.autorent.entity.User;
 import org.springframework.security.core.authority.AuthorityUtils;
 
@@ -14,8 +15,8 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
     }
 
 
-
     public User getUser() {
         return user;
     }
+
 }

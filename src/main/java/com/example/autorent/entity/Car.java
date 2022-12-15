@@ -23,7 +23,7 @@ public class Car {
     private String model;
     private String description;
     private double price;
-    private Date carYear;
+    private String carYear;
 
     @Enumerated(value = EnumType.STRING)
     private Mark mark;
@@ -33,4 +33,8 @@ public class Car {
 
     @Enumerated(value = EnumType.STRING)
     private CategoryType categoryType;
+    @Enumerated(value = EnumType.STRING)
+    private StatusType statusType;
+
+    private String picUrl;
 }
